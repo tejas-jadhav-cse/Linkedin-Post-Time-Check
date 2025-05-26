@@ -76,8 +76,59 @@ html, body {
   }
 }
 
+@keyframes fadein {
+  from { opacity: 0; transform: translateY(16px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes popin {
+  0% { opacity: 0; transform: scale(0.95); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
+}
+
+@keyframes highlight {
+  0% { background-color: #fefcbf; }
+  100% { background-color: inherit; }
+}
+
 .fade-in {
   animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-fadein {
+  animation: fadein 0.6s cubic-bezier(0.4,0,0.2,1) both;
+}
+
+.animate-popin {
+  animation: popin 0.4s cubic-bezier(0.4,0,0.2,1) both;
+}
+
+.loading-spinner {
+  border-radius: 50%;
+  animation: spinner 1s linear infinite;
+  transform-origin: center center;
+}
+
+.animate-wiggle:hover {
+  animation: wiggle 0.3s ease-in-out;
+}
+
+.animate-highlight {
+  animation: highlight 1s ease-in-out;
 }
 
 .card {
@@ -108,18 +159,10 @@ html, body {
   -webkit-backdrop-filter: blur(10px);
 }
 
-/* Enhanced loading spinner */
-@keyframes spinner {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+.feature-card {
+  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s cubic-bezier(0.4,0,0.2,1);
 }
-
-.loading-spinner {
-  border-radius: 50%;
-  animation: spinner 1s linear infinite;
-  transform-origin: center center;
+.feature-card:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 8px 32px 0 rgba(0,0,0,0.12);
 }

@@ -90,9 +90,9 @@ function App() {
   };
 
   return (
-    <div className={`min-h-screen ${darkMode ? 'dark bg-gray-900 text-white' : 'bg-gray-50 text-gray-900'}`}>
+    <div className={`min-h-screen transition-colors duration-500 ${darkMode ? 'dark bg-gray-900 text-white' : 'bg-gray-50 text-gray-900'}`}> 
       {/* Navigation */}
-      <nav className={`py-4 ${darkMode ? 'bg-gray-800/80' : 'bg-white/80'} backdrop-blur-md fixed w-full top-0 z-10`}>
+      <nav className={`py-4 ${darkMode ? 'bg-gray-800/80' : 'bg-white/80'} backdrop-blur-md fixed w-full top-0 z-10 transition-colors duration-500`}>
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-2">
@@ -132,10 +132,29 @@ function App() {
 
       {/* Main Content */}
       <main className="container mx-auto px-4 pt-24 pb-12">
-        <div className="max-w-2xl mx-auto">
-          <h1 className="text-3xl font-bold mb-6 text-center">LinkedIn Post Timestamp Extractor</h1>
+        <div className="max-w-2xl mx-auto animate-fadein">
+          <h1 className="text-3xl font-bold mb-6 text-center transition-opacity duration-700">LinkedIn Post Timestamp Extractor</h1>
+
+          {/* Features Section with animation */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+            <div className="feature-card bg-white dark:bg-gray-800 rounded-lg p-4 flex flex-col items-center animate-highlight">
+              <svg className="mb-2 text-blue-500 animate-wiggle" width="32" height="32" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12l2 2 4-4"/></svg>
+              <span className="font-semibold">Accurate Extraction</span>
+              <span className="text-xs text-gray-500 dark:text-gray-400 mt-1 text-center">Get precise timestamps from LinkedIn posts.</span>
+            </div>
+            <div className="feature-card bg-white dark:bg-gray-800 rounded-lg p-4 flex flex-col items-center animate-highlight" style={{ animationDelay: '0.2s' }}>
+              <svg className="mb-2 text-green-500 animate-wiggle" width="32" height="32" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M16 3v4a1 1 0 0 0 1 1h4"/></svg>
+              <span className="font-semibold">History</span>
+              <span className="text-xs text-gray-500 dark:text-gray-400 mt-1 text-center">View your recent extractions anytime.</span>
+            </div>
+            <div className="feature-card bg-white dark:bg-gray-800 rounded-lg p-4 flex flex-col items-center animate-highlight" style={{ animationDelay: '0.4s' }}>
+              <svg className="mb-2 text-purple-500 animate-wiggle" width="32" height="32" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/></svg>
+              <span className="font-semibold">Easy Copy</span>
+              <span className="text-xs text-gray-500 dark:text-gray-400 mt-1 text-center">Copy results with a single click.</span>
+            </div>
+          </div>
           
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-8">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-8 transition-all duration-500 ease-in-out hover:shadow-2xl">
             <form onSubmit={extractTimestamp} className="space-y-4">
               <div>
                 <label htmlFor="linkedin-url" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
@@ -157,7 +176,7 @@ function App() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition-colors disabled:opacity-50"
+                className="w-full bg-blue-600 hover:bg-blue-700 active:scale-95 transition-all duration-200 text-white font-medium py-2 px-4 rounded-md disabled:opacity-50"
               >
                 {loading ? (
                   <span className="flex items-center justify-center">
@@ -173,14 +192,14 @@ function App() {
           </div>
           
           {error && (
-            <div className="mb-6 p-4 bg-red-100 dark:bg-red-900/30 border-l-4 border-red-500 text-red-700 dark:text-red-400">
+            <div className="mb-6 p-4 bg-red-100 dark:bg-red-900/30 border-l-4 border-red-500 text-red-700 dark:text-red-400 animate-fadein">
               {error}
             </div>
           )}
           
           {/* Results Section */}
           {result && (
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-8">
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-8 animate-popin transition-all duration-500">
               <div className="flex justify-between items-center mb-4">
                 <h2 className="text-xl font-bold">Results</h2>
                 
@@ -230,7 +249,7 @@ function App() {
           
           {/* History Section */}
           {history.length > 0 && (
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 animate-fadein transition-all duration-500">
               <div className="flex justify-between items-center mb-4">
                 <h2 className="text-xl font-bold">Recent Extractions</h2>
                 <button
@@ -243,7 +262,7 @@ function App() {
               
               <div className="space-y-3">
                 {history.map((item, index) => (
-                  <div key={index} className="p-3 border rounded-md border-gray-200 dark:border-gray-700">
+                  <div key={index} className="p-3 border rounded-md border-gray-200 dark:border-gray-700 transition-transform duration-300 hover:scale-[1.02] bg-opacity-80 animate-popin">
                     <div className="flex justify-between">
                       <div className="font-medium truncate max-w-xs">{item.url}</div>
                       <div className="text-sm text-gray-500 dark:text-gray-400">{item.result.local}</div>
@@ -257,7 +276,7 @@ function App() {
       </main>
       
       {/* Footer */}
-      <footer className="py-6 bg-gray-100 dark:bg-gray-800">
+      <footer className="py-6 bg-gray-100 dark:bg-gray-800 transition-colors duration-500">
         <div className="container mx-auto px-4 text-center text-sm text-gray-600 dark:text-gray-400">
           <p>LinkedIn Timestamp Extractor</p>
           <p className="mt-1">© {new Date().getFullYear()} All Rights Reserved</p>
