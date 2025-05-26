@@ -1,23 +1,6 @@
 import { useState, useEffect } from 'react';
-import { 
-  Clock, 
-  Moon, 
-  Sun, 
-  Copy, 
-  Check, 
-  History, 
-  ExternalLink, 
-  Target,
-  Zap,
-  ArrowRight,
-  CheckCircle2,
-  Globe,
-  Linkedin
-} from 'lucide-react';
 import './App.css';
 import type { TimestampResult } from './types';
-import { useHistory } from './hooks/useHistory';
-import { DemoSection } from './components/DemoSection';
 
 // Import basic functionality
 function App() {

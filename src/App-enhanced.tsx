@@ -17,7 +17,7 @@ import {
 import './App.css';
 import type { TimestampResult } from './types';
 import { useHistory } from './hooks/useHistory';
-import { DemoSection } from './components/DemoSection';
+import { AboutSection } from './components/AboutSection';
 
 function App() {
   const [url, setUrl] = useState('');
@@ -446,11 +446,8 @@ function App() {
               </p>
             </div>
           </div>
-        </div>
-
-        {/* Demo Section */}
-        <DemoSection 
-          onSelectExample={(exampleUrl) => setUrl(exampleUrl)}
+        </div>        {/* About Section */}
+        <AboutSection 
           darkMode={darkMode}
         />
       </div>
