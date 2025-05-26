@@ -1,6 +1,6 @@
 # LinkedIn Timestamp Extractor
 
-A modern, sleek web application that extracts exact timestamps from LinkedIn posts and comments. Built with React, TypeScript, and Tailwind CSS.
+A modern, minimal web application that extracts exact timestamps from LinkedIn posts and comments. Built with React, TypeScript, and Tailwind CSS.
 
 ![LinkedIn Timestamp Extractor](https://img.shields.io/badge/React-TypeScript-blue?logo=react)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-38B2AC?logo=tailwind-css)
@@ -14,7 +14,7 @@ A modern, sleek web application that extracts exact timestamps from LinkedIn pos
 - **📚 History**: Keep track of recently extracted URLs (stored locally)
 - **📱 Responsive**: Works perfectly on both desktop and mobile devices
 - **⚡ Fast**: Built with Vite for lightning-fast development and builds
-- **🎨 Modern UI**: Clean, minimal design with smooth animations
+- **🎨 Modern UI**: Clean, centered design with minimal elements and subtle animations
 
 ## 🚀 Getting Started
 
@@ -57,9 +57,10 @@ The built files will be in the `dist` directory.
 2. **Paste the URL**: Enter the LinkedIn URL in the input field
 3. **Extract**: Click the "Extract Timestamp" button
 4. **View Results**: See the timestamp in multiple formats:
-   - Formatted date with timezone
-   - UTC timestamp
-   - Raw Unix timestamp (milliseconds)
+   - Unix timestamp
+   - ISO format
+   - Local time
+   - Relative time
 
 ### Supported URL Formats
 
@@ -77,10 +78,13 @@ The built files will be in the `dist` directory.
 
 ## 🎨 Design Features
 
-- **Gradient Backgrounds**: Beautiful gradient backgrounds that adapt to theme
-- **Smooth Animations**: Fade-in, slide-up, and pulse animations
-- **Glass Morphism**: Backdrop blur effects for modern appeal
-- **Responsive Layout**: Mobile-first design approach
+- **Centered Minimal Design**: All content is centered for a clean, focused experience
+- **Subtle Gradient Backgrounds**: Soft gradient backgrounds that adapt to theme
+- **Glass Morphism Effects**: Semi-transparent backgrounds with backdrop blur
+- **Smooth Animations**: Fade-in, hover, and subtle transform effects
+- **Reduced Visual Noise**: Simplified UI with focus on essential elements
+- **Consistent Spacing**: Uniform padding and margins throughout
+- **High Contrast Text**: Improved readability across light and dark modes
 - **Accessibility**: Proper ARIA labels and keyboard navigation
 
 ## 🔍 How It Works

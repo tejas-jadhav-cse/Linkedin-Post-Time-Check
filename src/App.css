@@ -1,3 +1,25 @@
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Base dark mode styles */
+:root {
+  --bg-gradient-light-start: #f9fafb;
+  --bg-gradient-light-end: #ffffff;
+  --bg-gradient-dark-start: #111827;
+  --bg-gradient-dark-end: #030712;
+}
+
+.dark {
+  --bg-gradient-light-start: #111827;
+  --bg-gradient-light-end: #030712;
+  --bg-gradient-dark-start: #f9fafb;
+  --bg-gradient-dark-end: #ffffff;
+}
+
 #root {
   width: 100%;
   margin: 0 auto;
@@ -7,6 +29,7 @@
   min-height: 100vh;
 }
 
+/* Responsive container classes */
 .container {
   width: 100%;
   max-width: 90rem;
@@ -22,6 +45,24 @@
   width: 100%;
   max-width: 40rem;
   margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Enhanced mobile responsiveness */
+@media (max-width: 640px) {
+  .container, .container-sm {
+    padding: 0 0.75rem;
+  }
+  
+  h1.text-4xl {
+    font-size: 1.75rem;
+    line-height: 2rem;
+  }
+  
+  .minimal-input {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
 }
 
 @keyframes fadeIn {
@@ -65,4 +106,20 @@
 .glass-effect {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+}
+
+/* Enhanced loading spinner */
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-spinner {
+  border-radius: 50%;
+  animation: spinner 1s linear infinite;
+  transform-origin: center center;
 }

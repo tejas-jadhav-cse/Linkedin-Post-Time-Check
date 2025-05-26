@@ -5,5 +5,11 @@
 @layer base {
   html {
     font-family: system-ui, -apple-system, sans-serif;
+    scroll-behavior: smooth; /* Add smooth scrolling */
+  }
+
+  /* Dark mode styles */
+  .dark {
+    color-scheme: dark;
   }
 }
