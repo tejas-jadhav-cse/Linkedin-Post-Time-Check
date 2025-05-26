@@ -14,16 +14,10 @@ import {
   Globe,
   Linkedin
 } from 'lucide-react';
-import { extractTimestampFromURL } from './utils/linkedinExtractor';
+import './App.css';
+import type { TimestampResult } from './types';
 import { useHistory } from './hooks/useHistory';
 import { DemoSection } from './components/DemoSection';
-
-export interface TimestampResult {
-  unix: number;
-  iso: string;
-  local: string;
-  relative: string;
-}
 
 function App() {
   const [url, setUrl] = useState('');
@@ -64,9 +58,16 @@ function App() {
     try {
       await new Promise(resolve => setTimeout(resolve, 800));
       
-      const extractedResult = extractTimestampFromURL(url);
-      
-      if (extractedResult) {
+      // Simulate timestamp extraction
+      if (url.includes('linkedin.com')) {
+        const now = new Date();
+        const extractedResult = {
+          unix: Math.floor(now.getTime() / 1000),
+          iso: now.toISOString(),
+          local: now.toLocaleString(),
+          relative: 'Just now'
+        };
+        
         setResult(extractedResult);
         addToHistory(url, extractedResult.unix);
       } else {

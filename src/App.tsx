@@ -19,15 +19,13 @@ import { useHistory } from './hooks/useHistory';
 import { DemoSection } from './components/DemoSection';
 import { ShareButton } from './components/ShareButton';
 import CONFIG from './config/app.config';
+import type { TimestampResult } from './types';
 
-export interface TimestampResult {
-  unix: number;
-  iso: string;
-  local: string;
-  relative: string;
-}
-
-function App() {  const [url, setUrl] = useState('');
+function App() {  
+  // Add debug component
+  console.log('App component rendering');
+  
+  const [url, setUrl] = useState('');
   const [result, setResult] = useState<TimestampResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -105,9 +103,8 @@ function App() {  const [url, setUrl] = useState('');
       setTimeout(() => setCopySuccess(''), 2000);
     } catch (err) {
       console.error('Failed to copy:', err);
-    }
-  };
-
+    }  };
+  
   return (
     <div className={`min-h-screen transition-all duration-500 ${
       darkMode 

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Share2, Check } from 'lucide-react';
-import { TimestampResult } from '../App';
+import type { TimestampResult } from '../types';
 
 interface ShareButtonProps {
   result: TimestampResult;

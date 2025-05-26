@@ -1,12 +1,6 @@
 // LinkedIn timestamp extraction utilities
 import CONFIG from '../config/app.config';
-
-export interface TimestampResult {
-  unix: number;
-  iso: string;
-  local: string;
-  relative: string;
-}
+import type { TimestampResult } from '../types';
 
 export function extractPostId(linkedinURL: string): string | null {
   const match = CONFIG.validation.postIdPattern.exec(linkedinURL);
