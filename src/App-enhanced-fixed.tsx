@@ -9,7 +9,9 @@ import {
   Target,
   Globe,
   Copy,
-  Check
+  Check,
+  AlertTriangle,
+  X
 } from 'lucide-react';
 import './App.css';
 import { useState } from 'react';
@@ -31,6 +33,7 @@ function App() {
   } = useApp();
   
   const [copySuccess, setCopySuccess] = useState('');
+  const [showNotice, setShowNotice] = useState(true);
   
   const copyToClipboard = async (text: string, format: string) => {
     try {
@@ -399,10 +402,42 @@ function App() {
             </p>
             <p className={`text-xs mt-2 ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>
               © 2025 LinkedIn Timestamp Extractor. All rights reserved.
-            </p>
+            </p>          </div>
+        </div>
+      </footer>      {/* Development Notice */}
+      {showNotice && (
+        <div className="fixed bottom-4 sm:bottom-6 md:bottom-8 left-4 sm:left-6 md:left-8 z-50 max-w-[calc(100%-2rem)] sm:max-w-xs md:max-w-sm animate-fadein">
+          <div className={`flex items-start rounded-xl border shadow-lg p-3 sm:p-4 md:p-5 transition-all duration-300 transform hover:-translate-y-1 ${
+            darkMode 
+              ? 'bg-amber-900/80 border-amber-700 text-amber-100' 
+              : 'bg-amber-50 border-amber-200 text-amber-800'
+          }`}>
+            <div className="flex-shrink-0 mr-3 md:mr-4">
+              <div className={`w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-xl sm:rounded-2xl flex items-center justify-center ${
+                darkMode ? 'bg-amber-800' : 'bg-amber-100'
+              }`}>
+                <AlertTriangle className={`w-5 h-5 sm:w-5 sm:h-5 md:w-6 md:h-6 ${darkMode ? 'text-amber-200' : 'text-amber-600'}`} />
+              </div>
+            </div>
+            <div className="flex-1 min-w-0">              <div className="flex justify-between items-center">
+                <h3 className="font-bold text-base sm:text-lg truncate">Notice</h3>
+                <button 
+                  onClick={() => setShowNotice(false)}
+                  className={`p-1 rounded-full hover:bg-amber-700/20 transition-colors flex-shrink-0 ml-2 ${
+                    darkMode ? 'text-amber-300 hover:text-amber-200' : 'text-amber-700 hover:text-amber-900'
+                  }`}
+                  aria-label="Close notification"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+              <p className={`text-sm mt-1 text-left ${darkMode ? 'text-amber-200' : 'text-amber-700'}`}>
+                WebApp is in Development phase, but don't worry you can use it.
+              </p>
+            </div>
           </div>
         </div>
-      </footer>
+      )}
     </div>
   );
 }
