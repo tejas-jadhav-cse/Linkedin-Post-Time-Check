@@ -7,9 +7,12 @@ import {
   ArrowRight,
   Zap,
   Target,
-  Globe
+  Globe,
+  Copy,
+  Check
 } from 'lucide-react';
 import './App.css';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useApp } from './context/AppContext';
 
@@ -26,6 +29,18 @@ function App() {
     setShowHistory,
     handleExtract
   } = useApp();
+  
+  const [copySuccess, setCopySuccess] = useState('');
+  
+  const copyToClipboard = async (text: string, format: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopySuccess(format);
+      setTimeout(() => setCopySuccess(''), 2000);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
+  };
 
   return (
     <div className={`min-h-screen transition-all duration-300 ${
@@ -174,8 +189,7 @@ function App() {
                   </h3>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {/* Unix Timestamp */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">                  {/* Unix Timestamp */}
                   <div className={`p-6 rounded-xl border ${
                     darkMode ? 'border-gray-600 bg-gray-700/50' : 'border-gray-200 bg-gray-50'
                   }`}>
@@ -183,8 +197,21 @@ function App() {
                       <h4 className={`font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                         Unix Timestamp
                       </h4>
+                      <button
+                        onClick={() => copyToClipboard(result.unix.toString(), 'unix')}
+                        className={`p-2 rounded-lg transition-colors ${
+                          copySuccess === 'unix'
+                            ? 'bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400' 
+                            : darkMode 
+                              ? 'hover:bg-gray-600 text-gray-400' 
+                              : 'hover:bg-gray-200 text-gray-600'
+                        }`}
+                        aria-label="Copy Unix timestamp"
+                      >
+                        {copySuccess === 'unix' ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                      </button>
                     </div>
-                    <p className={`text-xl ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                    <p className={`text-xl font-mono ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                       {result.unix}
                     </p>
                   </div>
@@ -197,8 +224,21 @@ function App() {
                       <h4 className={`font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                         ISO Format
                       </h4>
+                      <button
+                        onClick={() => copyToClipboard(result.iso, 'iso')}
+                        className={`p-2 rounded-lg transition-colors ${
+                          copySuccess === 'iso'
+                            ? 'bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400' 
+                            : darkMode 
+                              ? 'hover:bg-gray-600 text-gray-400' 
+                              : 'hover:bg-gray-200 text-gray-600'
+                        }`}
+                        aria-label="Copy ISO format"
+                      >
+                        {copySuccess === 'iso' ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                      </button>
                     </div>
-                    <p className={`text-xl break-all ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                    <p className={`text-xl font-mono break-all ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                       {result.iso}
                     </p>
                   </div>
@@ -211,6 +251,19 @@ function App() {
                       <h4 className={`font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                         Local Time
                       </h4>
+                      <button
+                        onClick={() => copyToClipboard(result.local, 'local')}
+                        className={`p-2 rounded-lg transition-colors ${
+                          copySuccess === 'local'
+                            ? 'bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400' 
+                            : darkMode 
+                              ? 'hover:bg-gray-600 text-gray-400' 
+                              : 'hover:bg-gray-200 text-gray-600'
+                        }`}
+                        aria-label="Copy local time"
+                      >
+                        {copySuccess === 'local' ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                      </button>
                     </div>
                     <p className={`text-xl ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                       {result.local}
@@ -225,6 +278,19 @@ function App() {
                       <h4 className={`font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                         Relative Time
                       </h4>
+                      <button
+                        onClick={() => copyToClipboard(result.relative, 'relative')}
+                        className={`p-2 rounded-lg transition-colors ${
+                          copySuccess === 'relative'
+                            ? 'bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400' 
+                            : darkMode 
+                              ? 'hover:bg-gray-600 text-gray-400' 
+                              : 'hover:bg-gray-200 text-gray-600'
+                        }`}
+                        aria-label="Copy relative time"
+                      >
+                        {copySuccess === 'relative' ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                      </button>
                     </div>
                     <p className={`text-xl ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                       {result.relative}
