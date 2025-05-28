@@ -63,6 +63,52 @@ html, body {
     padding-left: 1rem !important;
     padding-right: 1rem !important;
   }
+  
+  /* Font size adjustments */
+  .text-base {
+    font-size: 0.9375rem;
+  }
+  
+  .text-lg {
+    font-size: 1.0625rem;
+  }
+  
+  /* Spacing adjustments */
+  .p-4 {
+    padding: 0.875rem;
+  }
+  
+  .m-4 {
+    margin: 0.875rem;
+  }
+  
+  /* Make sure content doesn't overflow on small screens */
+  .break-all {
+    word-break: break-all;
+    overflow-wrap: break-word;
+  }
+  
+  /* Smaller margins on small screens */
+  .mb-10, .mb-12, .mb-16 {
+    margin-bottom: 2rem;
+  }
+  
+  .gap-6, .gap-8 {
+    gap: 1rem;
+  }
+  
+  /* Improve touch targets */
+  button, 
+  a[role="button"],
+  input[type="button"] {
+    min-height: 2.5rem;
+    min-width: 2.5rem;
+  }
+  
+  /* Notification position adjustment */
+  .fixed.bottom-4 {
+    bottom: 0.75rem;
+  }
 }
 
 @keyframes fadeIn {
