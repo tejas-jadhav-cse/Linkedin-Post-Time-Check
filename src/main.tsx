@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './index.css'
 import AppEnhanced from './App-enhanced-fixed'
+import AppModular from './App-modular'
 import App from './App'
 import { Tools } from './pages/Tools'
 import BatchAnalyzer from './pages/BatchAnalyzer'
@@ -23,9 +24,10 @@ const isDev = import.meta.env.DEV;
 // Determine which version to show based on URL or query parameter
 const params = new URLSearchParams(window.location.search);
 const standardVersion = params.get('standard') === 'true';
+const enhancedVersion = params.get('enhanced') === 'true';
 
-// Component to render based on URL or query parameter (Enhanced is now the default)
-const HomeComponent = standardVersion ? App : AppEnhanced;
+// Component to render based on URL or query parameter (Modular is now the default)
+const HomeComponent = standardVersion ? App : enhancedVersion ? AppEnhanced : AppModular;
 
 // Routes setup
 const AppRoutes = () => (
