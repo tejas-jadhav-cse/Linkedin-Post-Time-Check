@@ -8,7 +8,9 @@ import {
   Zap,
   ArrowRight,
   CheckCircle2,
-  Globe
+  Globe,
+  Linkedin,
+  History as HistoryIcon
 } from 'lucide-react';
 import './App.css';
 import type { TimestampResult } from './types';
@@ -319,15 +321,14 @@ function App() {
                   </button>
                 )}
               </div>
-              
-              {history.length === 0 ? (
+                {history.length === 0 ? (
                 <div className="text-center py-8">
-                  <History className={`w-12 h-12 mx-auto mb-4 ${darkMode ? 'text-gray-600' : 'text-gray-400'}`} />
+                  <HistoryIcon className={`w-12 h-12 mx-auto mb-4 ${darkMode ? 'text-gray-600' : 'text-gray-400'}`} />
                   <p className={`${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                     No recent extractions. Extract a timestamp to see it here.
                   </p>
                 </div>
-              ) : (
+              ): (
                 <div className="space-y-3">
                   {history.map((item) => (
                     <div
@@ -431,9 +432,8 @@ function App() {
               © 2025 LinkedIn Timestamp Extractor. All rights reserved.
             </p>
           </div>
-        </div>
-      </footer>
-    </div>
+        </div>      </footer>
+    </EnhancedLayout>
   );
 }
 
