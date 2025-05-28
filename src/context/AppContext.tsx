@@ -2,6 +2,7 @@ import { createContext, useContext, useState, useEffect } from 'react';
 import type { ReactNode } from 'react';
 import { useHistory } from '../hooks/useHistory';
 import type { TimestampResult } from '../types';
+import CONFIG from '../config/app.config';
 
 interface AppContextType {
   url: string;
@@ -73,12 +74,16 @@ export function AppProvider({ children }: AppProviderProps) {
     } catch (err) {
       console.error('Failed to copy:', err);
     }
-  };
-
-  // Handle extraction of timestamp
+  };  // Handle extraction of timestamp with improved error handling
   const handleExtract = async () => {
     if (!url.trim()) {
       setError('Please enter a LinkedIn URL');
+      return;
+    }
+
+    // Basic URL validation before proceeding
+    if (!url.toLowerCase().includes('linkedin.com')) {
+      setError('Please enter a valid LinkedIn URL');
       return;
     }
 
@@ -86,10 +91,55 @@ export function AppProvider({ children }: AppProviderProps) {
     setError('');
     setResult(null);
 
-    try {
-      // Import the extractor function dynamically to improve initial load performance
-      const { extractTimestampFromURL } = await import('../utils/linkedinExtractor');
-      const extractedResult = extractTimestampFromURL(url);
+    try {      // Import the optimized extractor functions dynamically to improve initial load performance
+      const { 
+        extractTimestampFromURL, 
+        getDemoResult, 
+        analyzeLinkedInURL 
+      } = await import('../utils/linkedinExtractor.optimized');
+      
+      // Generate demo data for testing if demo mode is enabled
+      const demoMode = CONFIG.features.demo && url.includes('demo');
+      let extractedResult = null;
+      
+      if (demoMode) {
+        // Use the demo result generator
+        extractedResult = getDemoResult();
+      } else {
+        // First analyze the URL to provide better feedback
+        const urlAnalysis = analyzeLinkedInURL(url);
+        
+        if (!urlAnalysis.isValid) {
+          // If URL is recognized as LinkedIn but known not to contain timestamp data
+          if (urlAnalysis.type === 'profile' || urlAnalysis.type === 'company') {
+            setError(`${urlAnalysis.reason}. Please provide a LinkedIn post or comment URL.`);
+            setLoading(false);
+            return;
+          }
+        }
+        
+        // Use the optimized extractor
+        extractedResult = extractTimestampFromURL(url);
+        
+        // Better error messages based on URL type if extraction failed
+        if (!extractedResult) {
+          let errorMessage = 'Could not extract timestamp. ';
+          
+          if (urlAnalysis.type === 'unknown') {
+            errorMessage += 'URL format not recognized. Please ensure this is a valid LinkedIn post or comment URL.';
+          } else if (urlAnalysis.type === 'post' || urlAnalysis.type === 'feed-update') {
+            errorMessage += 'Please ensure this is a direct link to a LinkedIn post.';
+          } else if (urlAnalysis.type === 'comment') {
+            errorMessage += 'Comment URL format may not be supported. Try using the parent post URL.';
+          } else {
+            errorMessage += 'Please ensure this is a valid LinkedIn post or comment URL.';
+          }
+          
+          setError(errorMessage);
+          setLoading(false);
+          return;
+        }
+      }
       
       if (extractedResult) {
         setResult(extractedResult);
@@ -99,7 +149,7 @@ export function AppProvider({ children }: AppProviderProps) {
       }
     } catch (err) {
       setError('An error occurred while extracting the timestamp');
-      console.error(err);
+      console.error('Extraction error:', err);
     } finally {
       setLoading(false);
     }

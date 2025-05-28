@@ -1,4 +1,4 @@
-import { ArrowRight, Zap } from 'lucide-react';
+import { ArrowRight, Zap, Wrench } from 'lucide-react';
 
 export const VersionNav = () => {
   const params = new URLSearchParams(window.location.search);
@@ -6,7 +6,18 @@ export const VersionNav = () => {
   
   return (
     <div className="version-nav fixed top-4 right-4 z-50">
-      <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg px-4 py-2 flex items-center space-x-2">
+      <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg px-4 py-2 flex items-center space-x-4">
+        <a 
+          href="/tools" 
+          className="text-green-600 dark:text-green-400 flex items-center hover:underline"
+          title="Access all available tools"
+        >
+          <span>Tools</span>
+          <Wrench size={16} className="ml-1" />
+        </a>
+        
+        <div className="h-4 border-r border-gray-300 dark:border-gray-600"></div>
+        
         {isStandardVersion ? (
           <a 
             href="/" 

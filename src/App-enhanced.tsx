@@ -1,23 +1,20 @@
 import { useState, useEffect } from 'react';
 import { 
   Clock, 
-  Moon, 
-  Sun, 
   Copy, 
   Check, 
-  History, 
   ExternalLink, 
   Target,
   Zap,
   ArrowRight,
   CheckCircle2,
-  Globe,
-  Linkedin
+  Globe
 } from 'lucide-react';
 import './App.css';
 import type { TimestampResult } from './types';
 import { useHistory } from './hooks/useHistory';
 import { AboutSection } from './components/AboutSection';
+import EnhancedLayout from './components/EnhancedLayout';
 
 function App() {
   const [url, setUrl] = useState('');
@@ -90,50 +87,13 @@ function App() {
       console.error('Failed to copy:', err);
     }
   };
-
   return (
-    <div className={`min-h-screen transition-all duration-300 ${
-      darkMode 
-        ? 'bg-gray-900' 
-        : 'bg-white'
-    }`}>
-      {/* Navigation */}
-      <nav className={`border-b ${darkMode ? 'border-gray-800' : 'border-gray-100'}`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-                <Linkedin className="w-5 h-5 text-white" />
-              </div>
-              <span className={`text-xl font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                TimestampExtractor
-              </span>
-            </div>
-            <div className="flex items-center space-x-4">
-              <button
-                onClick={() => setShowHistory(!showHistory)}
-                className={`p-2 rounded-lg transition-colors ${
-                  darkMode 
-                    ? 'text-gray-400 hover:text-white hover:bg-gray-800' 
-                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-                }`}
-              >
-                <History className="w-5 h-5" />
-              </button>
-              <button
-                onClick={toggleDarkMode}
-                className={`p-2 rounded-lg transition-colors ${
-                  darkMode 
-                    ? 'text-gray-400 hover:text-white hover:bg-gray-800' 
-                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-                }`}
-              >
-                {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-              </button>
-            </div>
-          </div>
-        </div>
-      </nav>
+    <EnhancedLayout 
+      darkMode={darkMode} 
+      toggleDarkMode={toggleDarkMode} 
+      showHistory={showHistory} 
+      setShowHistory={setShowHistory}
+    >
 
       {/* Hero Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">

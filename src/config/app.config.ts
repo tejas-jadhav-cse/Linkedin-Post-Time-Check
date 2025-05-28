@@ -43,12 +43,30 @@ export const CONFIG = {
     documentation: '#',
     support: '#'
   },
-  
-  // Validation patterns
+  // Validation patterns with improved support for various LinkedIn URL formats
   validation: {
-    linkedinUrlPattern: /^https?:\/\/(www\.)?linkedin\.com\/.*$/,
-    postIdPattern: /([0-9]{19})/,
-    commentIdPattern: /fsd_comment:\((\d+),urn:li:activity:\d+\)/
+    // Basic pattern for LinkedIn URLs
+    linkedinUrlPattern: /^https?:\/\/(www\.)?linkedin\.com\/.*$/i,
+    
+    // Enhanced pattern for LinkedIn post IDs (19-21 digits)
+    postIdPattern: /(?:^|[^0-9])([0-9]{19,21})(?:$|[^0-9])/,
+      // Enhanced pattern for LinkedIn comment formats
+    commentIdPattern: /fsd_comment:\((\d+),urn:li:activity:\d+\)|commentUrn=urn%3Ali%3Acomment%3A\((\d+)%2C|activity:(\d+)/,
+    
+    // Known LinkedIn URL patterns for posts and updates
+    postUrlPatterns: [
+      // Post URLs
+      /linkedin\.com\/posts\/[^/]+_([0-9]{19,21})(?:_|\/)/i,
+      
+      // Feed update URLs
+      /linkedin\.com\/feed\/update\/urn:li:activity:([0-9]{19,21})/i,
+      
+      // Shares URLs
+      /linkedin\.com\/.*\/shares\/([0-9]{19,21})/i,
+      
+      // Pulse article URLs
+      /linkedin\.com\/pulse\/[^/]+_([0-9]{19,21})(?:_|\/)/i
+    ]
   }
 };
 
