@@ -1,4 +1,4 @@
-import { Clock, History, Globe, Sparkles, BarChart, Target } from 'lucide-react';
+import { Clock, History, Globe, Sparkles, BarChart, Target, FileEdit } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { Layout } from '../components/Layout';
 import { Link } from 'react-router-dom';
@@ -39,7 +39,6 @@ const ToolCard = ({ title, description, icon, url, darkMode }: ToolCardProps) =>
 
 export const Tools = () => {
   const { darkMode } = useApp();
-
   const tools = [
     {
       title: 'Timestamp Extractor',
@@ -58,6 +57,12 @@ export const Tools = () => {
       description: 'Process multiple LinkedIn URLs at once for bulk timestamp extraction',
       icon: <BarChart className={`w-6 h-6 ${darkMode ? 'text-green-400' : 'text-green-600'}`} />,
       url: '/batch',
+    },
+    {
+      title: 'Post Formatter',
+      description: 'Format and optimize LinkedIn posts for maximum engagement and readability',
+      icon: <FileEdit className={`w-6 h-6 ${darkMode ? 'text-pink-400' : 'text-pink-600'}`} />,
+      url: '/formatter',
     },
     {
       title: 'URL Validator',
